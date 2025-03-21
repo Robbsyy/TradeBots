@@ -1,18 +1,23 @@
 name: Auto Sync Repo
 
+# Trigger on every push to 'main' and every 5 minutes.
 on:
   push:
     branches:
-      - main  # Change to your branch if needed
+      - main
   schedule:
-    - cron: "*/5 * * * *"  # Runs every 5 minutes
+    - cron: "*/5 * * * *"
+
+# IMPORTANT: Grant write permission so the workflow can push changes.
+permissions:
+  contents: write
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
 
       - name: Configure Git
